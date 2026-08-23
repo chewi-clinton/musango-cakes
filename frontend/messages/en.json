@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "cakes": "Cakes",
+    "pastries": "Pastries",
+    "shop": "Shop",
+    "gallery": "Gallery",
+    "about": "About",
+    "orderNow": "Order Now"
+  },
+  "home": {
+    "title": "Cakes & Pastries in Douala | Musango Cakes & More",
+    "h1": "Cakes & Pastries Made for Your Moments",
+    "subtitle": "Custom cakes and fresh pastries, baked in Douala and delivered to you.",
+    "ctaPrimary": "Order on WhatsApp",
+    "ctaSecondary": "Explore Our Cakes",
+    "shopByOccasion": "Shop by Occasion",
+    "shopByType": "Shop by Type",
+    "occasionPrompt": "What are you celebrating?",
+    "typePrompt": "What are you craving?"
+  },
+  "product": {
+    "orderOnWhatsapp": "Order on WhatsApp",
+    "addToCart": "Add to Cart",
+    "soldOut": "Sold Out",
+    "size": "Size",
+    "flavor": "Flavor",
+    "color": "Color",
+    "startingAt": "Starting at"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty.",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "total": "Total"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "name": "Your name",
+    "phone": "Phone number",
+    "fulfillment": "Delivery or pickup?",
+    "delivery": "Delivery",
+    "pickup": "Pickup",
+    "submit": "Send Order on WhatsApp"
+  },
+  "order": {
+    "title": "Create Your Cake",
+    "step1": "Choose size",
+    "step2": "Choose flavor",
+    "step3": "Choose design",
+    "step3Hint": "Upload an inspiration image",
+    "step4": "Choose date",
+    "step5": "Delivery or pickup",
+    "getQuote": "Get a Quote on WhatsApp"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "filterAll": "All"
+  },
+  "footer": {
+    "delivery": "Delivery",
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "refundPolicy": "Refund Policy",
+    "location": "Douala, Cameroon",
+    "getDirections": "Get Directions"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français"
+  }
+}

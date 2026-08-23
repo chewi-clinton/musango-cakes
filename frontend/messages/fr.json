@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "cakes": "Gâteaux",
+    "pastries": "Pâtisseries",
+    "shop": "Boutique",
+    "gallery": "Galerie",
+    "about": "À propos",
+    "orderNow": "Commander"
+  },
+  "home": {
+    "title": "Gâteaux & Pâtisseries à Douala | Musango Cakes & More",
+    "h1": "Des Gâteaux & Pâtisseries pour Vos Moments",
+    "subtitle": "Gâteaux sur mesure et pâtisseries fraîches, préparés à Douala et livrés chez vous.",
+    "ctaPrimary": "Commander sur WhatsApp",
+    "ctaSecondary": "Découvrir Nos Gâteaux",
+    "shopByOccasion": "Acheter par Occasion",
+    "shopByType": "Acheter par Type",
+    "occasionPrompt": "Que célébrez-vous ?",
+    "typePrompt": "Que désirez-vous ?"
+  },
+  "product": {
+    "orderOnWhatsapp": "Commander sur WhatsApp",
+    "addToCart": "Ajouter au Panier",
+    "soldOut": "Épuisé",
+    "size": "Taille",
+    "flavor": "Saveur",
+    "color": "Couleur",
+    "startingAt": "À partir de"
+  },
+  "cart": {
+    "title": "Votre Panier",
+    "empty": "Votre panier est vide.",
+    "checkout": "Passer la Commande",
+    "remove": "Retirer",
+    "quantity": "Quantité",
+    "total": "Total"
+  },
+  "checkout": {
+    "title": "Commande",
+    "name": "Votre nom",
+    "phone": "Numéro de téléphone",
+    "fulfillment": "Livraison ou retrait ?",
+    "delivery": "Livraison",
+    "pickup": "Retrait",
+    "submit": "Envoyer la Commande sur WhatsApp"
+  },
+  "order": {
+    "title": "Créez Votre Gâteau",
+    "step1": "Choisissez la taille",
+    "step2": "Choisissez la saveur",
+    "step3": "Choisissez le design",
+    "step3Hint": "Téléchargez une image d'inspiration",
+    "step4": "Choisissez la date",
+    "step5": "Livraison ou retrait",
+    "getQuote": "Obtenir un Devis sur WhatsApp"
+  },
+  "gallery": {
+    "title": "Galerie",
+    "filterAll": "Tout"
+  },
+  "footer": {
+    "delivery": "Livraison",
+    "contact": "Contact",
+    "privacyPolicy": "Politique de Confidentialité",
+    "terms": "Conditions Générales",
+    "refundPolicy": "Politique de Remboursement",
+    "location": "Douala, Cameroun",
+    "getDirections": "Itinéraire"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français"
+  }
+}

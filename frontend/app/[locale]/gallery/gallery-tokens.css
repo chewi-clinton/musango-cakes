@@ -1,0 +1,11 @@
+/* Placeholder gallery theme tokens — to be replaced with values extracted via
+   getComputedStyle() from torcakesandevents.com/gallery in the styling pass. */
+.musango-gallery {
+  --gallery-font: "Playfair Display", Georgia, serif;
+  --gallery-accent: #b8860b;
+  font-family: var(--gallery-font);
+}
+
+.musango-gallery .gallery-heading {
+  color: var(--gallery-accent);
+}
