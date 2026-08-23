@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Occasion, PriceOption, Product, ProductImage, Promotion
+from .models import Category, Occasion, Product, ProductImage, ProductVariant, Promotion
 
 
 class ProductImageInline(admin.TabularInline):
@@ -8,8 +8,8 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 
-class PriceOptionInline(admin.TabularInline):
-    model = PriceOption
+class ProductVariantInline(admin.TabularInline):
+    model = ProductVariant
     extra = 1
 
 
@@ -21,7 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ("name", "description")
     prepopulated_fields = {"slug": ("name",)}
     filter_horizontal = ("occasions",)
-    inlines = [ProductImageInline, PriceOptionInline]
+    inlines = [ProductImageInline, ProductVariantInline]
 
 
 @admin.register(Category)

@@ -42,6 +42,11 @@ class Product(models.Model):
     occasions = models.ManyToManyField(Occasion, blank=True, related_name="products")
     is_active = models.BooleanField(default=True)
     is_sold_out = models.BooleanField(default=False)
+    # SEO
+    meta_title = models.CharField(
+        max_length=70, blank=True, help_text="Defaults to the product name if left blank."
+    )
+    meta_description = models.CharField(max_length=160, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -55,6 +60,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to="products/")
+    alt_text = models.CharField(max_length=200, blank=True)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -64,9 +70,11 @@ class ProductImage(models.Model):
         return f"{self.product.name} image #{self.order}"
 
 
-class PriceOption(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="price_options")
-    label = models.CharField(max_length=100)
+class ProductVariant(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="variants")
+    size = models.CharField(max_length=50, blank=True)
+    flavor = models.CharField(max_length=100, blank=True)
+    color = models.CharField(max_length=50, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=0)
     order = models.PositiveIntegerField(default=0)
 
@@ -74,7 +82,8 @@ class PriceOption(models.Model):
         ordering = ["order"]
 
     def __str__(self):
-        return f"{self.product.name} - {self.label} ({self.price} FCFA)"
+        bits = " / ".join(b for b in [self.size, self.flavor, self.color] if b)
+        return f"{self.product.name} - {bits or 'default'} ({self.price} FCFA)"
 
 
 class Promotion(models.Model):
