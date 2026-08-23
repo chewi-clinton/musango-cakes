@@ -1,11 +1,15 @@
-/* Placeholder gallery theme tokens — to be replaced with values extracted via
-   getComputedStyle() from torcakesandevents.com/gallery in the styling pass. */
+/* Gallery theme tokens extracted via getComputedStyle() from
+   torcakesandevents.com/gallery (scraped_data/extracted_styles.json). */
 .musango-gallery {
-  --gallery-font: "Playfair Display", Georgia, serif;
-  --gallery-accent: #b8860b;
-  font-family: var(--gallery-font);
+  --gallery-font-heading: var(--font-playfair), Georgia, serif;
+  --gallery-font-body: var(--font-manrope), sans-serif;
+  --gallery-heading-color: rgb(42, 23, 18);
+  --gallery-body-color: rgb(109, 83, 74);
+  font-family: var(--gallery-font-body);
+  color: var(--gallery-body-color);
 }
 
 .musango-gallery .gallery-heading {
-  color: var(--gallery-accent);
+  font-family: var(--gallery-font-heading);
+  color: var(--gallery-heading-color);
 }

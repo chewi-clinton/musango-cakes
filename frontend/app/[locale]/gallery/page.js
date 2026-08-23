@@ -1,7 +1,11 @@
 import Image from "next/image";
+import { Playfair_Display, Manrope } from "next/font/google";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
 import "./gallery-tokens.css";
+
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata = { title: "Gallery | Musango Cakes & More" };
 
@@ -13,7 +17,7 @@ export default async function GalleryPage({ searchParams }) {
   ]);
 
   return (
-    <div className="musango-gallery">
+    <div className={`musango-gallery ${playfair.variable} ${manrope.variable}`}>
       <div className="mx-auto max-w-6xl px-4 py-10">
         <h1 className="text-2xl font-bold mb-6 gallery-heading">Gallery</h1>
 
