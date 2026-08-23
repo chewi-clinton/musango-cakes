@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: musango_cakes
+      POSTGRES_USER: musango
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - musango_pgdata:/var/lib/postgresql/data
+
+volumes:
+  musango_pgdata:
