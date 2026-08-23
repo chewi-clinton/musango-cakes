@@ -46,7 +46,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     def get_cover_image(self, obj):
         first = obj.images.first()
-        return ProductImageSerializer(first).data if first else None
+        return ProductImageSerializer(first, context=self.context).data if first else None
 
     def get_starting_price(self, obj):
         first = obj.variants.order_by("price").first()

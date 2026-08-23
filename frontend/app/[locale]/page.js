@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
+import ProductGrid from "@/components/ProductGrid";
 
 export async function generateMetadata() {
   const t = await getTranslations("home");
@@ -36,23 +38,59 @@ export default async function HomePage({ params }) {
   }
   const whatsapp = storeInfo?.whatsapp_number?.replace(/\D/g, "") || "";
 
+  let featured = [];
+  try {
+    const productsRes = await api.products();
+    featured = (productsRes.results || []).slice(0, 8);
+  } catch {
+    featured = [];
+  }
+  const heroImage = featured.find((p) => p.cover_image)?.cover_image;
+
   return (
     <div>
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:py-24 text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">{t("h1")}</h1>
-        <p className="mt-4 text-lg text-black/60 max-w-xl mx-auto">{t("subtitle")}</p>
-        <div className="mt-8 flex items-center justify-center gap-4">
-          <a
-            href={`https://wa.me/${whatsapp}`}
-            className="rounded-full bg-black text-white px-6 py-3 font-medium hover:bg-black/80"
-          >
-            {t("ctaPrimary")}
-          </a>
-          <Link href="/cakes" className="rounded-full border px-6 py-3 font-medium hover:bg-black/5">
-            {t("ctaSecondary")}
-          </Link>
+      <section className="relative">
+        <div className="relative h-[70vh] min-h-[420px] w-full">
+          {heroImage && (
+            <Image
+              src={heroImage.image}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          )}
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white max-w-2xl">
+              {t("h1")}
+            </h1>
+            <p className="mt-4 text-lg text-white/85 max-w-xl">{t("subtitle")}</p>
+            <div className="mt-8 flex items-center justify-center gap-4">
+              <a
+                href={`https://wa.me/${whatsapp}`}
+                className="rounded-full bg-white text-black px-6 py-3 font-medium hover:bg-white/90"
+              >
+                {t("ctaPrimary")}
+              </a>
+              <Link
+                href="/cakes"
+                className="rounded-full border border-white text-white px-6 py-3 font-medium hover:bg-white/10"
+              >
+                {t("ctaSecondary")}
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
+
+      {featured.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 py-12">
+          <h2 className="text-xl font-semibold mb-6">Featured Products</h2>
+          <ProductGrid products={featured} />
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-4 py-12">
         <h2 className="text-xl font-semibold mb-6">{t("occasionPrompt")}</h2>

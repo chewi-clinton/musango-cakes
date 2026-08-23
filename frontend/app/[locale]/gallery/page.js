@@ -44,7 +44,7 @@ export default async function GalleryPage({ searchParams }) {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {itemsRes.results?.map((item) => (
+          {itemsRes.results?.map((item, i) => (
             <div key={item.id} className="relative aspect-square rounded-xl overflow-hidden bg-black/5">
               <Image
                 src={item.image}
@@ -52,6 +52,7 @@ export default async function GalleryPage({ searchParams }) {
                 fill
                 sizes="(max-width: 640px) 50vw, 25vw"
                 className="object-cover"
+                priority={i < 4}
               />
             </div>
           ))}

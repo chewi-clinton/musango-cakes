@@ -5,6 +5,8 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.js");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Local dev only: our own Django backend runs on 127.0.0.1/localhost.
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: "http",

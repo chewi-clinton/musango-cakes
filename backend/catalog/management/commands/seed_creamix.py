@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 from django.core.files import File
@@ -62,6 +63,18 @@ PRODUCT_META = {
 }
 
 
+def sanitize_description(text):
+    """Strip Creamix's real business name out of scraped meta descriptions —
+    only the generic sentence structure is a reusable reference, never their
+    actual identity."""
+    return re.sub(
+        r"from Creamix (Bakeshop|Cakes|Bake Shop)",
+        "from Musango Cakes & More",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+
 class Command(BaseCommand):
     help = "Seed products from scraped_data/scraped_creamix.json (structural reference only)."
 
@@ -83,7 +96,7 @@ class Command(BaseCommand):
                 slug=slug,
                 defaults={
                     "name": entry["name"].strip().title(),
-                    "description": entry["description"],
+                    "description": sanitize_description(entry["description"]),
                     "category": category,
                 },
             )
