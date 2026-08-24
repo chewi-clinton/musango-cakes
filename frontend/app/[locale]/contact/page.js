@@ -1,3 +1,4 @@
+import { Phone, Mail, Clock } from "lucide-react";
 import StaticPageBody from "@/components/StaticPageBody";
 import StoreLocationBlock from "@/components/StoreLocationBlock";
 import { api } from "@/lib/api";
@@ -18,9 +19,21 @@ export default async function ContactPage({ params }) {
     <div className="mx-auto max-w-3xl px-4 py-10">
       <StaticPageBody slug="contact" locale={locale} />
       <div className="flex flex-wrap gap-4 my-6 text-sm">
-        {storeInfo?.phone && <span>📞 {storeInfo.phone}</span>}
-        {storeInfo?.email && <span>✉️ {storeInfo.email}</span>}
-        {storeInfo?.opening_hours && <span>🕒 {storeInfo.opening_hours}</span>}
+        {storeInfo?.phone && (
+          <span className="flex items-center gap-1.5">
+            <Phone className="h-4 w-4" strokeWidth={1.5} /> {storeInfo.phone}
+          </span>
+        )}
+        {storeInfo?.email && (
+          <span className="flex items-center gap-1.5">
+            <Mail className="h-4 w-4" strokeWidth={1.5} /> {storeInfo.email}
+          </span>
+        )}
+        {storeInfo?.opening_hours && (
+          <span className="flex items-center gap-1.5">
+            <Clock className="h-4 w-4" strokeWidth={1.5} /> {storeInfo.opening_hours}
+          </span>
+        )}
       </div>
       <a
         href={`https://wa.me/${whatsapp}`}

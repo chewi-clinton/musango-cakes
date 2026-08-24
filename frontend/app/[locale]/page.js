@@ -4,6 +4,18 @@ import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
 import ProductGrid from "@/components/ProductGrid";
 import StoreLocationBlock from "@/components/StoreLocationBlock";
+import FaqAccordion from "@/components/FaqAccordion";
+import {
+  Cake,
+  Heart,
+  GraduationCap,
+  Baby,
+  PartyPopper,
+  Gift,
+  CakeSlice,
+  Croissant,
+  Cookie,
+} from "lucide-react";
 
 export async function generateMetadata() {
   const t = await getTranslations("home");
@@ -11,21 +23,21 @@ export async function generateMetadata() {
 }
 
 const OCCASIONS = [
-  { slug: "birthday", emoji: "🎂", en: "Birthday", fr: "Anniversaire" },
-  { slug: "wedding", emoji: "💍", en: "Wedding", fr: "Mariage" },
-  { slug: "graduation", emoji: "🎓", en: "Graduation", fr: "Remise de diplôme" },
-  { slug: "anniversary", emoji: "❤️", en: "Anniversary", fr: "Anniversaire de mariage" },
-  { slug: "baby-shower", emoji: "👶", en: "Baby Shower", fr: "Baby Shower" },
-  { slug: "celebration", emoji: "🎉", en: "Celebration", fr: "Célébration" },
-  { slug: "gift", emoji: "🎁", en: "Gift", fr: "Cadeau" },
+  { slug: "birthday", Icon: Cake, en: "Birthday", fr: "Anniversaire" },
+  { slug: "wedding", Icon: Heart, en: "Wedding", fr: "Mariage" },
+  { slug: "graduation", Icon: GraduationCap, en: "Graduation", fr: "Remise de diplôme" },
+  { slug: "anniversary", Icon: Heart, en: "Anniversary", fr: "Anniversaire de mariage" },
+  { slug: "baby-shower", Icon: Baby, en: "Baby Shower", fr: "Baby Shower" },
+  { slug: "celebration", Icon: PartyPopper, en: "Celebration", fr: "Célébration" },
+  { slug: "gift", Icon: Gift, en: "Gift", fr: "Cadeau" },
 ];
 
 const TYPES = [
-  { emoji: "🎂", en: "Cakes", fr: "Gâteaux", href: "/cakes" },
-  { emoji: "🧁", en: "Cupcakes", fr: "Cupcakes", href: "/shop?category=cupcakes" },
-  { emoji: "🥐", en: "Pastries", fr: "Pâtisseries", href: "/pastries" },
-  { emoji: "🍪", en: "Cookies", fr: "Biscuits", href: "/shop?category=cookies" },
-  { emoji: "🎁", en: "Gift Boxes", fr: "Coffrets Cadeaux", href: "/shop?category=gift-boxes" },
+  { Icon: Cake, en: "Cakes", fr: "Gâteaux", href: "/cakes" },
+  { Icon: CakeSlice, en: "Cupcakes", fr: "Cupcakes", href: "/shop?category=cupcakes" },
+  { Icon: Croissant, en: "Pastries", fr: "Pâtisseries", href: "/pastries" },
+  { Icon: Cookie, en: "Cookies", fr: "Biscuits", href: "/shop?category=cookies" },
+  { Icon: Gift, en: "Gift Boxes", fr: "Coffrets Cadeaux", href: "/shop?category=gift-boxes" },
 ];
 
 export default async function HomePage({ params }) {
@@ -205,7 +217,7 @@ export default async function HomePage({ params }) {
               href={`/shop?occasion=${o.slug}`}
               className="flex flex-col items-center gap-2 rounded-xl border p-4 hover:bg-black/5 text-center"
             >
-              <span className="text-2xl">{o.emoji}</span>
+              <o.Icon className="h-6 w-6" strokeWidth={1.5} />
               <span className="text-sm font-medium">{locale === "fr" ? o.fr : o.en}</span>
             </Link>
           ))}
@@ -221,7 +233,7 @@ export default async function HomePage({ params }) {
               href={type.href}
               className="flex flex-col items-center gap-2 rounded-xl border p-4 hover:bg-black/5 text-center"
             >
-              <span className="text-2xl">{type.emoji}</span>
+              <type.Icon className="h-6 w-6" strokeWidth={1.5} />
               <span className="text-sm font-medium">{locale === "fr" ? type.fr : type.en}</span>
             </Link>
           ))}
@@ -259,14 +271,7 @@ export default async function HomePage({ params }) {
         <h2 className="text-xl font-semibold mb-6">
           {locale === "fr" ? "Questions fréquentes" : "Frequently Asked Questions"}
         </h2>
-        <div className="flex flex-col divide-y">
-          {FAQ_ITEMS.map((item) => (
-            <div key={item.q} className="py-4">
-              <p className="font-medium mb-1">{item.q}</p>
-              <p className="text-sm text-black/60">{item.a}</p>
-            </div>
-          ))}
-        </div>
+        <FaqAccordion items={FAQ_ITEMS} />
       </section>
 
       <section className="mx-auto max-w-3xl px-4 py-12">

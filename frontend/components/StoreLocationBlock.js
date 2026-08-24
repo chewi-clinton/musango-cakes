@@ -1,3 +1,4 @@
+import { MapPin } from "lucide-react";
 import { api } from "@/lib/api";
 
 export default async function StoreLocationBlock() {
@@ -11,7 +12,10 @@ export default async function StoreLocationBlock() {
   return (
     <div className="rounded-xl border p-6 my-8">
       <p className="font-semibold">{storeInfo?.business_name || "Musango Cakes & More"}</p>
-      <p className="text-black/60 mt-1">📍 {storeInfo?.address_text || "Douala, Cameroon"}</p>
+      <p className="text-black/60 mt-1 flex items-center gap-1.5">
+        <MapPin className="h-4 w-4" strokeWidth={1.5} />
+        {storeInfo?.address_text || "Douala, Cameroon"}
+      </p>
       {storeInfo?.directions_url && (
         <a href={storeInfo.directions_url} className="text-sm underline mt-2 inline-block">
           Get Directions

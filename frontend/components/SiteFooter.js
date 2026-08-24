@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
 
@@ -17,8 +18,9 @@ export default async function SiteFooter() {
           <p className="font-semibold mb-2">
             {storeInfo?.business_name || "Musango Cakes & More"}
           </p>
-          <p className="text-black/60">
-            📍 {storeInfo?.address_text || "Douala, Cameroon"}
+          <p className="text-black/60 flex items-center gap-1.5">
+            <MapPin className="h-4 w-4" strokeWidth={1.5} />
+            {storeInfo?.address_text || "Douala, Cameroon"}
           </p>
           {storeInfo?.directions_url && (
             <a href={storeInfo.directions_url} className="text-black/60 underline">
