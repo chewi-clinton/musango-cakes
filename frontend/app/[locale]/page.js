@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
 import ProductGrid from "@/components/ProductGrid";
+import StoreLocationBlock from "@/components/StoreLocationBlock";
 
 export async function generateMetadata() {
   const t = await getTranslations("home");
@@ -55,17 +56,74 @@ export default async function HomePage({ params }) {
     galleryPreview = [];
   }
 
-  const WHY_MUSANGO =
+  const HOW_IT_WORKS =
     locale === "fr"
       ? [
-          { emoji: "🎂", text: "Chaque gâteau est fait sur mesure, pas produit en série." },
-          { emoji: "🚚", text: "Livraison réelle à Douala, avec des délais clairs." },
-          { emoji: "💬", text: "Commandez en quelques minutes, directement sur WhatsApp." },
+          {
+            title: "Parcourez ou dites-nous",
+            text: "Regardez nos gâteaux et notre galerie, ou décrivez simplement ce que vous imaginez — occasion, style, budget.",
+          },
+          {
+            title: "Partagez les détails",
+            text: "Envoyez-nous la date, la taille et vos idées de design sur WhatsApp. On vous aide à choisir la saveur et la finition.",
+          },
+          {
+            title: "Confirmez votre commande",
+            text: "Vous recevez un prix clair et une date de retrait ou de livraison avant que rien ne soit finalisé.",
+          },
         ]
       : [
-          { emoji: "🎂", text: "Every cake is made to order, never mass-produced." },
-          { emoji: "🚚", text: "Real delivery across Douala, with clear timelines." },
-          { emoji: "💬", text: "Order in minutes, straight from WhatsApp." },
+          {
+            title: "Browse or Tell Us",
+            text: "Look through our cakes and gallery, or just describe what you're picturing — occasion, style, budget.",
+          },
+          {
+            title: "Share the Details",
+            text: "Send your date, size, and design ideas on WhatsApp. We'll help you land on the right flavor and finish.",
+          },
+          {
+            title: "Confirm Your Order",
+            text: "You'll get a clear price and a pickup or delivery date before anything is final.",
+          },
+        ];
+
+  const FAQ_ITEMS =
+    locale === "fr"
+      ? [
+          {
+            q: "À combien de temps à l'avance dois-je commander ?",
+            a: "Pour un gâteau personnalisé, comptez au moins 3 à 5 jours. Les commandes du jour même sont étudiées au cas par cas — demandez-nous sur WhatsApp.",
+          },
+          {
+            q: "Livrez-vous partout à Douala ?",
+            a: "Nous livrons dans plusieurs quartiers de Douala — voir notre page Livraison pour les zones actuellement desservies.",
+          },
+          {
+            q: "Puis-je vous envoyer une photo de référence ?",
+            a: "Bien sûr. Parcourez notre Galerie pour vous inspirer, ou envoyez-nous directement une photo sur WhatsApp.",
+          },
+          {
+            q: "Comment puis-je payer ?",
+            a: "Le paiement est organisé directement avec nous sur WhatsApp une fois votre commande confirmée.",
+          },
+        ]
+      : [
+          {
+            q: "How far in advance should I order?",
+            a: "For custom cakes, plan for at least 3–5 days' notice. Same-day orders are handled case by case — just ask us on WhatsApp.",
+          },
+          {
+            q: "Do you deliver across Douala?",
+            a: "We deliver to a number of Douala neighborhoods — see our Delivery page for the areas currently served.",
+          },
+          {
+            q: "Can I send a reference photo?",
+            a: "Absolutely — browse our Gallery for inspiration, or send us a photo directly on WhatsApp.",
+          },
+          {
+            q: "How do I pay?",
+            a: "Payment is arranged directly with us on WhatsApp once your order is confirmed.",
+          },
         ];
 
   return (
@@ -106,23 +164,37 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {WHY_MUSANGO.map((item) => (
-            <div key={item.text} className="flex items-start gap-3">
-              <span className="text-2xl">{item.emoji}</span>
-              <p className="text-sm text-black/70">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {featured.length > 0 && (
         <section className="mx-auto max-w-6xl px-4 py-12">
           <h2 className="text-xl font-semibold mb-6">Featured Products</h2>
           <ProductGrid products={featured} />
         </section>
       )}
+
+      <section className="mx-auto max-w-6xl px-4 py-12">
+        <h2 className="text-xl font-semibold mb-8 text-center">
+          {locale === "fr" ? "Commander est simple" : "Ordering Your Cake Is Easy"}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          {HOW_IT_WORKS.map((step, i) => (
+            <div key={step.title} className="text-center">
+              <div className="mx-auto mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-black text-white text-sm font-semibold">
+                {i + 1}
+              </div>
+              <p className="font-medium mb-1">{step.title}</p>
+              <p className="text-sm text-black/60">{step.text}</p>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <a
+            href={`https://wa.me/${whatsapp}`}
+            className="inline-block rounded-full bg-black text-white px-6 py-3 font-medium hover:bg-black/80"
+          >
+            {locale === "fr" ? "Commencer ma commande" : "Start Your Order"}
+          </a>
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-4 py-12">
         <h2 className="text-xl font-semibold mb-6">{t("occasionPrompt")}</h2>
@@ -182,6 +254,38 @@ export default async function HomePage({ params }) {
           </div>
         </section>
       )}
+
+      <section className="mx-auto max-w-3xl px-4 py-12">
+        <h2 className="text-xl font-semibold mb-6">
+          {locale === "fr" ? "Questions fréquentes" : "Frequently Asked Questions"}
+        </h2>
+        <div className="flex flex-col divide-y">
+          {FAQ_ITEMS.map((item) => (
+            <div key={item.q} className="py-4">
+              <p className="font-medium mb-1">{item.q}</p>
+              <p className="text-sm text-black/60">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-4 py-12">
+        <h2 className="text-xl font-semibold mb-6">
+          {locale === "fr" ? "Contact" : "Contact Us"}
+        </h2>
+        <p className="text-sm text-black/60 mb-2">
+          {locale === "fr"
+            ? "La façon la plus rapide de nous joindre est WhatsApp."
+            : "The fastest way to reach us is WhatsApp."}
+        </p>
+        <a
+          href={`https://wa.me/${whatsapp}`}
+          className="inline-block rounded-full bg-black text-white px-6 py-3 font-medium hover:bg-black/80 mb-2"
+        >
+          {locale === "fr" ? "Discuter sur WhatsApp" : "Chat on WhatsApp"}
+        </a>
+        <StoreLocationBlock />
+      </section>
     </div>
   );
 }
