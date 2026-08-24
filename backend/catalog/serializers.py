@@ -31,6 +31,8 @@ class ProductListSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     cover_image = serializers.SerializerMethodField()
     starting_price = serializers.SerializerMethodField()
+    default_variant_id = serializers.SerializerMethodField()
+    default_variant_label = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -41,6 +43,8 @@ class ProductListSerializer(serializers.ModelSerializer):
             "category",
             "cover_image",
             "starting_price",
+            "default_variant_id",
+            "default_variant_label",
             "is_sold_out",
         ]
 
@@ -48,9 +52,22 @@ class ProductListSerializer(serializers.ModelSerializer):
         first = obj.images.first()
         return ProductImageSerializer(first, context=self.context).data if first else None
 
+    def _cheapest_variant(self, obj):
+        return obj.variants.order_by("price").first()
+
     def get_starting_price(self, obj):
-        first = obj.variants.order_by("price").first()
-        return first.price if first else None
+        variant = self._cheapest_variant(obj)
+        return variant.price if variant else None
+
+    def get_default_variant_id(self, obj):
+        variant = self._cheapest_variant(obj)
+        return variant.id if variant else None
+
+    def get_default_variant_label(self, obj):
+        variant = self._cheapest_variant(obj)
+        if not variant:
+            return None
+        return " / ".join(b for b in [variant.size, variant.flavor, variant.color] if b) or "Standard"
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
