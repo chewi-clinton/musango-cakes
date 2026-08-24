@@ -82,33 +82,22 @@ async function main() {
     await page.close();
   }
 
-  // --- Flow 2: custom order wizard ---
+  // --- Flow 2: single-page custom order form ---
   {
     const page = await browser.newPage();
-    watch(page, "order-wizard");
+    watch(page, "order-form");
     await page.goto(`${BASE_URL}/en/order`, { waitUntil: "networkidle2" });
 
     await page.click('button ::-p-text(6")');
-    await page.click("button.mt-6"); // Next
-    await page.waitForFunction(() => document.body.innerText.includes("Choose flavor"));
-
     await page.click('button ::-p-text(Chocolate)');
-    await page.click("button.mt-6");
-    await page.waitForFunction(() => document.body.innerText.includes("Choose design"));
-
-    await page.click("button.mt-6"); // skip design text, go next
-    await page.waitForFunction(() => document.body.innerText.includes("Choose date"));
-
     await page.evaluate(() => {
       const input = document.querySelector('input[type="date"]');
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
       setter.call(input, "2026-12-25");
       input.dispatchEvent(new Event("input", { bubbles: true }));
     });
-    await page.click("button.mt-6");
-    await page.waitForFunction(() => document.body.innerText.includes("Delivery or pickup"));
-
     await page.click('button ::-p-text(delivery)');
+
     const nameInputs = await page.$$("input[required]");
     await nameInputs[0].type("Test Customer 2");
     await nameInputs[1].type("671111111");
@@ -116,10 +105,27 @@ async function main() {
     await page.click('button[type="submit"]');
     const waUrl2 = await Promise.race([
       waRedirectPromise2,
-      new Promise((_, reject) => setTimeout(() => reject(new Error("order wizard: no wa.me redirect within 8s")), 8000)),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("order form: no wa.me redirect within 8s")), 8000)),
     ]);
-    results.push(`order wizard redirected to WhatsApp: ${waUrl2}`);
+    results.push(`order form redirected to WhatsApp: ${waUrl2}`);
 
+    await page.close();
+  }
+
+  // --- Flow 2b: gallery click -> pre-filled order form ---
+  {
+    const page = await browser.newPage();
+    watch(page, "gallery-to-order");
+    await page.goto(`${BASE_URL}/en/gallery`, { waitUntil: "networkidle2" });
+    const card = await page.$('a[href*="/order?ref=gallery"]');
+    if (!card) throw new Error("No gallery card links into /order");
+    await card.click();
+    await page.waitForFunction(() => window.location.pathname.includes("/order"), { timeout: 5000 });
+    const bodyText = await page.$eval("body", (el) => el.innerText);
+    if (!bodyText.includes("Referencing design")) {
+      throw new Error("Order page did not show the referenced gallery design");
+    }
+    results.push(`gallery click pre-filled order page: ${page.url()}`);
     await page.close();
   }
 
