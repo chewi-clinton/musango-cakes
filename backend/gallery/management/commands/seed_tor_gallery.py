@@ -21,8 +21,18 @@ class Command(BaseCommand):
             return
 
         data = json.loads(DATA_FILE.read_text())
+        # Curated order matching the reference site's actual filter-pill order
+        # (not alphabetical) — falls back to alphabetical for any new category.
+        preferred_order = [
+            "Wedding", "Luxury", "Birthday", "Dessert Box",
+            "Custom", "Kids", "Anniversary", "Signature",
+        ]
+        ordered_categories = sorted(
+            data["categories"],
+            key=lambda c: preferred_order.index(c) if c in preferred_order else len(preferred_order),
+        )
         category_objs = {}
-        for i, cat_name in enumerate(sorted(data["categories"])):
+        for i, cat_name in enumerate(ordered_categories):
             obj, _ = GalleryCategory.objects.update_or_create(
                 slug=slugify(cat_name), defaults={"name": cat_name, "order": i}
             )

@@ -1,15 +1,35 @@
-/* Gallery theme tokens extracted via getComputedStyle() from
-   torcakesandevents.com/gallery (scraped_data/extracted_styles.json). */
+/* Gallery colors extracted via getComputedStyle() from
+   torcakesandevents.com/gallery (scraped_data/extracted_styles.json).
+   Font intentionally matches the site header (Quicksand), not TOR's — per
+   explicit user feedback overriding the earlier "re-skin with TOR's fonts"
+   plan. Only the warm color palette stays TOR-derived. */
 .musango-gallery {
-  --gallery-font-heading: var(--font-playfair), Georgia, serif;
-  --gallery-font-body: var(--font-manrope), sans-serif;
   --gallery-heading-color: rgb(42, 23, 18);
   --gallery-body-color: rgb(109, 83, 74);
-  font-family: var(--gallery-font-body);
+  --gallery-cream: #f7f1ea;
   color: var(--gallery-body-color);
 }
 
+.musango-gallery .gallery-hero {
+  background: var(--gallery-cream);
+}
+
 .musango-gallery .gallery-heading {
-  font-family: var(--gallery-font-heading);
   color: var(--gallery-heading-color);
+}
+
+.musango-gallery .gallery-eyebrow {
+  color: var(--gallery-heading-color);
+  opacity: 0.6;
+}
+
+.musango-gallery .gallery-pill-active {
+  background: var(--gallery-heading-color);
+  color: white;
+  border-color: var(--gallery-heading-color);
+}
+
+.musango-gallery .gallery-card {
+  border-color: rgba(42, 23, 18, 0.15);
+  background: var(--gallery-cream);
 }
