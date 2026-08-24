@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { api } from "@/lib/api";
+import { FacebookIcon, InstagramIcon, XIcon } from "./SocialIcons";
 
 export default async function SiteFooter() {
   let storeInfo = null;
@@ -33,10 +34,22 @@ export default async function SiteFooter() {
 
         <div>
           <p className="font-semibold mb-2">Follow</p>
-          <div className="flex flex-col gap-1 text-black/60">
-            {storeInfo?.instagram_url && <a href={storeInfo.instagram_url}>Instagram</a>}
-            {storeInfo?.facebook_url && <a href={storeInfo.facebook_url}>Facebook</a>}
-            {storeInfo?.x_url && <a href={storeInfo.x_url}>X</a>}
+          <div className="flex flex-col gap-2 text-black/60">
+            {storeInfo?.instagram_url && (
+              <a href={storeInfo.instagram_url} className="flex items-center gap-2">
+                <InstagramIcon className="h-4 w-4" /> Instagram
+              </a>
+            )}
+            {storeInfo?.facebook_url && (
+              <a href={storeInfo.facebook_url} className="flex items-center gap-2">
+                <FacebookIcon className="h-4 w-4" /> Facebook
+              </a>
+            )}
+            {storeInfo?.x_url && (
+              <a href={storeInfo.x_url} className="flex items-center gap-2">
+                <XIcon className="h-4 w-4" /> X
+              </a>
+            )}
           </div>
         </div>
       </div>

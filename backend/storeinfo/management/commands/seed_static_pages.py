@@ -39,17 +39,13 @@ PAGES = [
         "title_en": "Contact Us",
         "title_fr": "Contactez-nous",
         "body_en": (
-            "The fastest way to reach us is WhatsApp — tap the order button on "
-            "any page. You can also reach us by phone or email during opening "
-            "hours.\n\n[Placeholder — real phone, email, and opening hours to be "
-            "added.]"
+            "We're open 24/7. The fastest way to reach us is WhatsApp, but "
+            "you're welcome to call or email too."
         ),
         "body_fr": (
-            "Le moyen le plus rapide de nous joindre est WhatsApp — appuyez sur "
-            "le bouton de commande sur n'importe quelle page. Vous pouvez aussi "
-            "nous contacter par téléphone ou email pendant nos heures "
-            "d'ouverture.\n\n[Espace réservé — téléphone, email et horaires réels "
-            "à ajouter.]"
+            "Nous sommes ouverts 24h/24 et 7j/7. Le moyen le plus rapide de nous "
+            "joindre est WhatsApp, mais vous pouvez aussi appeler ou envoyer un "
+            "email."
         ),
     },
     {
@@ -77,16 +73,15 @@ PAGES = [
         "title_en": "Musango Cakes & More in Douala",
         "title_fr": "Musango Cakes & More à Douala",
         "body_en": (
-            "Musango Cakes & More is based in Douala, Cameroon, serving "
-            "customers across the city with cakes and pastries for birthdays, "
-            "weddings, and everyday celebrations.\n\n[Placeholder — real address "
-            "and map details to be added.]"
+            "Musango Cakes & More is based near Rondpoint Dakar in Douala, "
+            "Cameroon, serving customers across the city with cakes and "
+            "pastries for birthdays, weddings, and everyday celebrations."
         ),
         "body_fr": (
-            "Musango Cakes & More est basé à Douala, au Cameroun, et sert les "
-            "clients de toute la ville avec des gâteaux et pâtisseries pour les "
-            "anniversaires, mariages et célébrations du quotidien.\n\n[Espace "
-            "réservé — adresse réelle et détails de localisation à ajouter.]"
+            "Musango Cakes & More est basé près du Rondpoint Dakar à Douala, "
+            "au Cameroun, et sert les clients de toute la ville avec des "
+            "gâteaux et pâtisseries pour les anniversaires, mariages et "
+            "célébrations du quotidien."
         ),
     },
     {

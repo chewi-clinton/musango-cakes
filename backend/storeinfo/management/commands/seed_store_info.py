@@ -9,7 +9,7 @@ STORE_INFO = {
     "whatsapp_number": "+237651589219",
     "email": "musangolensley1111@gmail.com",
     "facebook_url": "https://www.facebook.com/share/19LgJiVa5D/?mibextid=wwXIfr",
-    "address_text": "Dakar - Brazzaville, Douala, Cameroon",
+    "address_text": "Rondpoint Dakar, Douala, Cameroon",
     "opening_hours": "Open 24/7",
 }
 
