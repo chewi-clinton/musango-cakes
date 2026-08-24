@@ -4,6 +4,7 @@ import { Quicksand } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import WhatsAppFloatButton from "@/components/WhatsAppFloatButton";
 import LocalBusinessJsonLd from "@/components/LocalBusinessJsonLd";
 import { CartProvider } from "@/lib/CartContext";
 import "../globals.css";
@@ -32,6 +33,7 @@ export default async function LocaleLayout({ children, params }) {
             <SiteHeader />
             <main className="flex-1">{children}</main>
             <SiteFooter />
+            <WhatsAppFloatButton />
           </CartProvider>
         </NextIntlClientProvider>
       </body>

@@ -61,7 +61,7 @@ export default function OrderPage() {
         <div className="flex items-center gap-4 rounded-xl border p-3 mb-8">
           {refImage && (
             <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0">
-              <Image src={refImage} alt={refTitle} fill className="object-cover" />
+              <Image src={refImage} alt={refTitle} fill sizes="64px" className="object-cover" />
             </div>
           )}
           <div className="flex-1">

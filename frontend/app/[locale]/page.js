@@ -47,6 +47,27 @@ export default async function HomePage({ params }) {
   }
   const heroImage = featured.find((p) => p.cover_image)?.cover_image;
 
+  let galleryPreview = [];
+  try {
+    const galleryRes = await api.galleryItems();
+    galleryPreview = (galleryRes.results || []).slice(0, 4);
+  } catch {
+    galleryPreview = [];
+  }
+
+  const WHY_MUSANGO =
+    locale === "fr"
+      ? [
+          { emoji: "🎂", text: "Chaque gâteau est fait sur mesure, pas produit en série." },
+          { emoji: "🚚", text: "Livraison réelle à Douala, avec des délais clairs." },
+          { emoji: "💬", text: "Commandez en quelques minutes, directement sur WhatsApp." },
+        ]
+      : [
+          { emoji: "🎂", text: "Every cake is made to order, never mass-produced." },
+          { emoji: "🚚", text: "Real delivery across Douala, with clear timelines." },
+          { emoji: "💬", text: "Order in minutes, straight from WhatsApp." },
+        ];
+
   return (
     <div>
       <section className="relative">
@@ -82,6 +103,17 @@ export default async function HomePage({ params }) {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {WHY_MUSANGO.map((item) => (
+            <div key={item.text} className="flex items-start gap-3">
+              <span className="text-2xl">{item.emoji}</span>
+              <p className="text-sm text-black/70">{item.text}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -123,6 +155,33 @@ export default async function HomePage({ params }) {
           ))}
         </div>
       </section>
+      {galleryPreview.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 py-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold">From Our Gallery</h2>
+            <Link href="/gallery" className="text-sm font-medium underline">
+              See the Full Gallery
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {galleryPreview.map((item) => (
+              <Link
+                key={item.id}
+                href={`/order?ref=gallery&refId=${item.id}&title=${encodeURIComponent(item.title)}&image=${encodeURIComponent(item.image)}`}
+                className="relative aspect-[4/5] rounded-xl overflow-hidden border block"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                  className="object-cover"
+                />
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
