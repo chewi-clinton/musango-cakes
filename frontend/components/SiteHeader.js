@@ -3,6 +3,8 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useState } from "react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 export default function SiteHeader() {
   const t = useTranslations("nav");
@@ -21,8 +23,8 @@ export default function SiteHeader() {
   return (
     <header className="border-b border-black/10 sticky top-0 bg-white z-40">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
-        <Link href="/" className="font-bold text-lg tracking-tight">
-          Musango Cakes & More
+        <Link href="/" className="flex items-center gap-2 shrink-0">
+          <Image src="/logo-header.png" alt="Musango Cakes & More" width={301} height={72} className="h-11 w-auto" priority />
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
@@ -44,11 +46,11 @@ export default function SiteHeader() {
         </div>
 
         <button
-          className="md:hidden text-sm font-medium"
+          className="md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          ☰
+          {open ? <X className="h-6 w-6" strokeWidth={1.5} /> : <Menu className="h-6 w-6" strokeWidth={1.5} />}
         </button>
       </div>
 
